@@ -22,8 +22,8 @@ const AdminReport = () => {
 
   /* Get all users from MongoDB Database */
   useEffect( () => {
-    axios.get('https://rainbow-river-4709.herokuapp.com/adminReport')
-    // axios.get('http://localhost:3001/adminReport')
+    // axios.get('https://rainbow-river-4709.herokuapp.com/adminReport')
+    axios.get('http://localhost:3001/adminReport')
       .then( res => {
         setAllUsers(res.data.allUsers)
       })
