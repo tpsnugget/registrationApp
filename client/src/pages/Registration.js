@@ -7,6 +7,9 @@ import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
+import AdminReport from './AdminReport'
+import Confirmation from './Confirmation'
+
 const Registration = () => {
 
   const [ address1, setAddress1 ] = useState('')
@@ -18,6 +21,12 @@ const Registration = () => {
   const [ usState, setUsState ] = useState('')
   const [ zip, setZip ] = useState('')
 
+  /* Logig to handle page routing since there are only 3 pages */
+  const [ showAdminReport, setShowAdminReport ] = useState(false)
+  const [ showConfirmation, setShowConfirmation ] = useState(false)
+  const [ showRegistration, setShowRegistration ] = useState(true)
+
+  /* Form onChange Hanlders */
   const handleAddress1Change = (e) => {
     setAddress1(e.target.value)
   }
@@ -48,20 +57,45 @@ const Registration = () => {
     setZip(e.target.value)
   }
 
+  /* Routing handler functions */
+  const handleConfirmationRouting = () => {
+    setShowConfirmation(false)
+    setShowRegistration(true)
+  }
+
+  const handleAdminReportRouting = () => {
+    setShowAdminReport(false)
+    setShowRegistration(true)
+  }
+
+  const handleShowAdminReport = () => {
+    setShowRegistration(false)
+    setShowAdminReport(true)
+  }
+
+  /* Submit Form on Button click */
   const handleSubmit = () => {
     const userData = {
+      address1,
+      address2,
+      city,
+      country,
       firstName,
-      lastName
+      lastName,
+      usState,
+      zip
     }
 
-    // axios.post('https://rainbow-river-4709.herokuapp.com/register', userData)
-    axios.post('http://localhost:3001/register', userData)
+    axios.post('https://rainbow-river-4709.herokuapp.com/register', userData)
+    // axios.post('http://localhost:3001/register', userData)
       .then( res => {
         console.log('Registration register POST res.data is ', res.data)
+        setShowRegistration(false)
+        setShowConfirmation(true)
       })
     
-    // axios.get('https://rainbow-river-4709.herokuapp.com/adminReport')
-    axios.get('http://localhost:3001/adminReport')
+    axios.get('https://rainbow-river-4709.herokuapp.com/adminReport')
+    // axios.get('http://localhost:3001/adminReport')
       .then( res => {
         console.log('Registration adminReport GET res.data is ', res.data)
       })
@@ -70,15 +104,15 @@ const Registration = () => {
   return (
     <Box>
       <Container>
+      {showRegistration ?
         <Grid container>
-
           <Grid container style={{marginTop: '2rem'}}>
             <Typography variant='h4'>
               Registration Form
             </Typography>
           </Grid>
 
-          <Grid container style={{marginTop: '2rem'}}>
+          <Grid container style={{marginTop: '1rem'}}>
             <Grid item xs={3}>
               <TextField label='First Name' value={firstName} variant='outlined' onChange={handleFirstNameChange} style={{width: '100%'}} />
             </Grid>
@@ -101,10 +135,10 @@ const Registration = () => {
               <TextField label='City' value={city} variant='outlined' onChange={handleCityChange} style={{width: '100%'}} />
             </Grid>
             <Grid container item xs={2}>
-              <TextField label='State' value={usState} variant='outlined' onChange={handleUsStateChange} style={{width: '100%', marginLeft: '0.5rem'}} />
+              <TextField label='State (2-digits)' value={usState} variant='outlined' onChange={handleUsStateChange} style={{width: '100%', marginLeft: '0.5rem'}} />
             </Grid>
             <Grid container item xs={3}>
-              <TextField label='Zip Code 12345 or 12345-1234' value={zip} variant='outlined' onChange={handleZipChange} style={{width: '100%', marginLeft: '0.5rem'}} />
+              <TextField label='Zip Code (12345 or 12345-1234)' value={zip} variant='outlined' onChange={handleZipChange} style={{width: '100%', marginLeft: '0.5rem'}} />
             </Grid>
             <Grid container item xs={2}>
               <TextField label='Country' value={country} variant='outlined' onChange={handleCountryChange} style={{width: '100%', marginLeft: '0.5rem'}} />
@@ -112,12 +146,28 @@ const Registration = () => {
           </Grid>
 
           <Grid container style={{marginTop: '1rem'}}>
-            <Grid item xs={3}>
+            <Grid item xs={1}>
               <Button color='primary' variant='contained' onClick={handleSubmit} >Submit</Button>
+            </Grid>
+            <Grid item xs={2}>
+              <Button color='primary' variant='contained' onClick={handleShowAdminReport} >Admin Report</Button>
             </Grid>
           </Grid>
 
         </Grid>
+        : null
+      }
+
+      {showConfirmation ?
+        <Confirmation handleConfirmationRouting={handleConfirmationRouting} />
+        : null
+      }
+
+      {showAdminReport ?
+        <AdminReport handleAdminReportRouting={handleAdminReportRouting} />
+        : null
+      }
+
       </Container>
     </Box>
   )
