@@ -18,7 +18,7 @@ const Confirmation = ({dbError, handleConfirmationRouting, userFromDB}) => {
     if (dbError === 'Error' || dbError === 'Server validation error') {
       setShowError(true)
     }
-  }, [] )
+  }, [dbError] )
 
   return (
     <Grid container>

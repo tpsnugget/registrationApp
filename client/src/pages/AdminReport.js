@@ -22,67 +22,16 @@ const AdminReport = () => {
 
   /* Get all users from MongoDB Database */
   useEffect( () => {
-    // axios.get('https://rainbow-river-4709.herokuapp.com/adminReport')
-    axios.get('http://localhost:3001/adminReport')
+    axios.get('https://rainbow-river-4709.herokuapp.com/adminReport')
+    // axios.get('http://localhost:3001/adminReport')
       .then( res => {
         setAllUsers(res.data.allUsers)
       })
   }, [] )
 
   const usersToDisplay = allUsers.map( (user, i) => {
-    if (i % 2 === 0) {
     return (
-      <Grid key={i} container>
-          <Grid container item xs={1} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.firstName}
-            </Typography>
-          </Grid>
-          <Grid container item xs={1} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.lastName}
-            </Typography>
-          </Grid>
-          <Grid container item xs={2} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.address1}
-            </Typography>
-          </Grid>
-          <Grid container item xs={1} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.address2}
-            </Typography>
-          </Grid>
-          <Grid container item xs={1} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.city}
-            </Typography>
-          </Grid>
-          <Grid container item xs={1} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.state}
-            </Typography>
-          </Grid>
-          <Grid container item xs={1} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.zip}
-            </Typography>
-          </Grid>
-          <Grid container item xs={1} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.country}
-            </Typography>
-          </Grid>
-          <Grid container item xs={3} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
-            <Typography variant='body1'>
-              {user.date}
-            </Typography>
-          </Grid>
-      </Grid>
-    )
-    }
-    return (
-      <Grid key={i} container style={{backgroundColor: 'rgba(0,0,255,0.1)'}}>
+      <Grid key={i} container style={i % 2 === 0 ? null : {backgroundColor: 'rgba(0,0,255,0.1)'}}>
           <Grid container item xs={1} justify='flex-start' style={{borderRight: '1px solid white', paddingLeft: '0.2rem', paddingRight: '0.2rem'}}>
             <Typography variant='body1'>
               {user.firstName}

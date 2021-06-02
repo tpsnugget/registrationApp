@@ -10,11 +10,8 @@ function App() {
         <Route exact path='/'>
           <Registration />
         </Route>
-        <Route exact path='/AdminReport'>
+        <Route path='/AdminReport'>
           <AdminReport />
-        </Route>
-        <Route exact path='/Registration'>
-          <Registration />
         </Route>
       </Switch>
     </div>

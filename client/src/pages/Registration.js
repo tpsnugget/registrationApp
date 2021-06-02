@@ -87,8 +87,8 @@ const Registration = () => {
       zip
     }
 
-    // axios.post('https://rainbow-river-4709.herokuapp.com/register', userData)
-    axios.post('http://localhost:3001/register', userData)
+    axios.post('https://rainbow-river-4709.herokuapp.com/register', userData)
+    // axios.post('http://localhost:3001/register', userData)
       .then( res => {
         if (res.data.msg === 'Success') {
           setAddress1('')
