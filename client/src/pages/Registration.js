@@ -54,14 +54,14 @@ const Registration = () => {
       lastName
     }
 
-    axios.post('https://rainbow-river-4709.herokuapp.com/register', userData)
-    // axios.post('http://localhost:3001/register', userData)
+    // axios.post('https://rainbow-river-4709.herokuapp.com/register', userData)
+    axios.post('http://localhost:3001/register', userData)
       .then( res => {
         console.log('Registration register POST res.data is ', res.data)
       })
     
-    axios.get('https://rainbow-river-4709.herokuapp.com/adminReport')
-    // axios.get('http://localhost:3001/adminReport')
+    // axios.get('https://rainbow-river-4709.herokuapp.com/adminReport')
+    axios.get('http://localhost:3001/adminReport')
       .then( res => {
         console.log('Registration adminReport GET res.data is ', res.data)
       })
@@ -97,21 +97,21 @@ const Registration = () => {
           </Grid>
 
           <Grid container style={{marginTop: '1rem'}}>
-            <Grid item xs={3}>
+            <Grid container item xs={3}>
               <TextField label='City' value={city} variant='outlined' onChange={handleCityChange} style={{width: '100%'}} />
             </Grid>
-            <Grid item xs={2}>
+            <Grid container item xs={2}>
               <TextField label='State' value={usState} variant='outlined' onChange={handleUsStateChange} style={{width: '100%', marginLeft: '0.5rem'}} />
             </Grid>
-            <Grid item xs={3}>
-              <TextField label='Zip Code 12345 or 12345-1234' value={zip} variant='outlined' onChange={handleAddress1Change} style={{width: '100%', marginLeft: '0.5rem'}} />
+            <Grid container item xs={3}>
+              <TextField label='Zip Code 12345 or 12345-1234' value={zip} variant='outlined' onChange={handleZipChange} style={{width: '100%', marginLeft: '0.5rem'}} />
             </Grid>
-            <Grid item xs={2}>
+            <Grid container item xs={2}>
               <TextField label='Country' value={country} variant='outlined' onChange={handleCountryChange} style={{width: '100%', marginLeft: '0.5rem'}} />
             </Grid>
           </Grid>
 
-          <Grid container style={{marginTop: '2rem'}}>
+          <Grid container style={{marginTop: '1rem'}}>
             <Grid item xs={3}>
               <Button color='primary' variant='contained' onClick={handleSubmit} >Submit</Button>
             </Grid>
